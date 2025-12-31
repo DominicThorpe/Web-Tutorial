@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-header bg-success text-white py-3">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div>
+          <h1 class="h4 mb-1">Create a New Field</h1>
+          <div class="opacity-75 small">Add field details for Generica Farms’ dashboard</div>
+        </div>
+        <span class="badge bg-light text-success">Field Setup</span>
+      </div>
+    </div>
+
+    <div class="card-body p-4">
+      <form method="post" class="row g-3">
+        {{ context.form.csrf_token }}
+
+        <!-- Section: Basics -->
+        <div class="col-12">
+          <h2 class="h6 text-uppercase text-muted mb-2">Basics</h2>
+          <hr class="mt-0">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Name</label>
+          {{ context.form.name(class="form-control", placeholder="e.g., North Field") }}
+          <div class="form-text">Use a name farmers will recognise quickly.</div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Area</label>
+          <div class="input-group">
+            {{ context.form.area(class="form-control", placeholder="2.5") }}
+            <span class="input-group-text">ha</span>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">pH</label>
+          {{ context.form.pH(class="form-control", placeholder="6.5") }}
+        </div>
+
+        <!-- Section: Soil & Water -->
+        <div class="col-12 mt-4">
+          <h2 class="h6 text-uppercase text-muted mb-2">Soil & Water</h2>
+          <hr class="mt-0">
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Soil Type</label>
+          {{ context.form.soilType(class="form-control") }}
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Soil Organic Matter</label>
+          <div class="input-group">
+            {{ context.form.SOM(class="form-control", placeholder="4.0") }}
+            <span class="input-group-text">%</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Drainage</label>
+          {{ context.form.drainage(class="form-control") }}
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Irrigation</label>
+          {{ context.form.irrigation(class="form-control") }}
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Current Crop</label>
+          {{ context.form.crop_rel(class="form-select") }}
+          <div class="form-text">Choose the currently planted crop.</div>
+        </div>
+
+        <!-- Section: Management -->
+        <div class="col-12 mt-4">
+          <h2 class="h6 text-uppercase text-muted mb-2">Management</h2>
+          <hr class="mt-0">
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Risk Level</label>
+          {{ context.form.risk(class="form-control") }}
+          <div class="form-text">Example: Low / Moderate / High.</div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Notes</label>
+          {{ context.form.notes(class="form-control", rows="4", placeholder="Anything useful for decision-making…") }}
+        </div>
+
+        <!-- Actions -->
+        <div class="col-12 d-flex gap-2 justify-content-end pt-2">
+          <a href="{{ url_for('main') }}" class="btn btn-outline-secondary btn-lg">
+            Cancel
+          </a>
+          <button type="submit" class="btn btn-success btn-lg">
+            Save Field
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
