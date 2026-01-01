@@ -1,0 +1,10 @@
+body {
+  background-color: mintcream;
+}
+
+.dashboard-header {
+  background-color: #2f6f4e;
+  color: white;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
