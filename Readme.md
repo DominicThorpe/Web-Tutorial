@@ -18,11 +18,11 @@ Upon completion of this course you should have a basic understanding of the foll
 
 ### What You Will Make
 
-![The Homepage](/screenshots/homepage.png)
+<img src="/screenshots/homepage.png" height="300" alt="The homepage">
 
-![The Field View Page](/screenshots/field_view.png)
+<img src="/screenshots/field_view.png" height="300" alt="The field details page">
 
-![The New Field Form](/screenshots/new_field.png)
+<img src="/screenshots/new_field.png" height="300" alt="The form to create a new field">
 
 ## Setup
 
