@@ -1,3 +1,16 @@
+"""
+SQLAlchemy ORM models for crops, fields, and field operations.
+
+This module defines the core database schema for an agricultural
+management application. The models represent:
+- Crops grown by the system
+- Fields (land parcels) with soil and management attributes
+- Operations performed on fields over time
+
+All timestamps are stored as ISO-8601 strings in UTC for portability
+and simplicity.
+"""
+
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
 from datetime import datetime, timezone
@@ -8,6 +21,13 @@ db_name = 'database.db'
 
 
 class Crop(db.Model):
+    """
+    Database model representing an agricultural crop.
+
+    A Crop defines agronomic and economic characteristics that can be associated with one or more 
+    fields.
+    """
+
     __tablename__ = "Crops"
 
     id = db.Column(db.String, primary_key=True)
@@ -20,6 +40,13 @@ class Crop(db.Model):
 
 
 class Field(db.Model):
+    """
+    Database model representing an agricultural field or land parcel.
+
+    A Field stores physical, soil, and management attributes and may optionally be associated with 
+    a Crop. Fields also track a history of operations performed on them.
+    """
+
     __tablename__ = "Fields"
 
     id = db.Column(db.String, primary_key=True)
@@ -42,6 +69,13 @@ class Field(db.Model):
 
 
 class Operation(db.Model):
+    """
+    Database model representing an operation performed on a field.
+
+    Operations capture management actions such as sowing, fertilisation, spraying, irrigation, or 
+    harvesting events.
+    """
+
     __tablename__ = "Operations"
 
     id = db.Column(db.String, primary_key=True)
