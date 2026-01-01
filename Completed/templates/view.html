@@ -30,8 +30,13 @@
       <div class="card shadow-soft h-100">
         <div class="card-body kpi">
           <div class="small-label">Last operation</div>
-          <div class="h5 mb-1 fw-semibold">N top dressing</div>
-          <div class="text-muted">12 Mar 2025</div>
+          {% if context.field.operations[0] %}
+            <div class="h5 mb-1 fw-semibold">{{ context.field.operations[0].operation }}</div>
+            <div class="text-muted">{{ context.field.operations[0].date }}</div>
+          {% else %}
+            <div class="h5 mb-1 fw-semibold">No previous actions</div>
+            <div class="text-muted">N/A</div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -54,7 +59,7 @@
           <h2 class="h5 mb-3">Field Details</h2>
           <ul class="list-unstyled list-tight mb-0">
             <li><strong>Crop:</strong> {{ context.field.crop_rel.name }}</li>
-            <li><strong>Sowing date:</strong> 18 Oct 2024</li>
+            <li><strong>Sowing date:</strong> {{ context.field.sowingDate }}</li>
             <li><strong>Target yield:</strong> {{ context.field.crop_rel.targetYield }} t/ha</li>
             <li><strong>Irrigation:</strong> {{ context.field.irrigation }}</li>
             <li><strong>Drainage:</strong> {{ context.field.drainage }}</li>
@@ -101,33 +106,27 @@
             <table class="table table-sm align-middle mb-0">
               <thead class="table-light">
                 <tr>
-                  <th style="width: 140px;">Date</th>
+                  <th style="width: 100px;">Date</th>
                   <th>Operation</th>
-                  <th style="width: 160px;">Product / Detail</th>
-                  <th style="width: 120px;">Rate</th>
+                  <th>Product / Detail</th>
+                  <th>Rate</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>12 Mar 2025</td>
-                  <td>N top dressing</td>
-                  <td>Ammonium nitrate</td>
-                  <td>70 kg N/ha</td>
-                </tr>
-                <tr>
-                  <td>26 Feb 2025</td>
-                  <td>Herbicide</td>
-                  <td>Broadleaf mix</td>
-                  <td>Label rate</td>
-                </tr>
-                <tr>
-                  <td>18 Oct 2024</td>
-                  <td>Drilling</td>
-                  <td>Winter wheat</td>
-                  <td>180 kg/ha</td>
-                </tr>
+                {% for operation in context.field.operations %}
+                  <tr>
+                    <td>{{ operation.date }}</td>
+                    <td>{{ operation.operation }}</td>
+                    <td>{{ operation.detail }}</td>
+                    <td>{{ operation.rate }}</td>
+                    <td><a href="{{ url_for('operation_delete', operation_id=operation.id) }}" class="btn btn-sm btn-danger">Delete</a></td>
+                  </tr>
+                {% endfor %}
               </tbody>
             </table>
+
+            <a href="{{ url_for('operation_new', field_id=context.field.id) }}" class="btn btn-success mt-3">Add Operation</a>
           </div>
         </div>
       </div>

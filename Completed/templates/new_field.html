@@ -2,13 +2,12 @@
 
 {% block content %}
 <div class="container py-4">
-
   <div class="card border-0 shadow-sm">
     <div class="card-header bg-success text-white py-3">
       <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
         <div>
           <h1 class="h4 mb-1">Create a New Field</h1>
-          <div class="opacity-75 small">Add field details for Generica Farms’ dashboard</div>
+          <div class="opacity-75 small">Add field details for Generica Farms' dashboard</div>
         </div>
         <span class="badge bg-light text-success">Field Setup</span>
       </div>
@@ -49,12 +48,12 @@
           <hr class="mt-0">
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label class="form-label">Soil Type</label>
           {{ context.form.soilType(class="form-control") }}
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label class="form-label">Soil Organic Matter</label>
           <div class="input-group">
             {{ context.form.SOM(class="form-control", placeholder="4.0") }}
@@ -62,26 +61,31 @@
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label class="form-label">Drainage</label>
           {{ context.form.drainage(class="form-control") }}
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-3">
           <label class="form-label">Irrigation</label>
           {{ context.form.irrigation(class="form-control") }}
-        </div>
-
-        <div class="col-md-6">
-          <label class="form-label">Current Crop</label>
-          {{ context.form.crop_rel(class="form-select") }}
-          <div class="form-text">Choose the currently planted crop.</div>
         </div>
 
         <!-- Section: Management -->
         <div class="col-12 mt-4">
           <h2 class="h6 text-uppercase text-muted mb-2">Management</h2>
           <hr class="mt-0">
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Current Crop</label>
+          {{ context.form.crop_rel(class="form-select") }}
+          <div class="form-text">Choose the currently planted crop.</div>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Sowing Date</label>
+          {{ context.form.sowingDate(class="form-control") }}
         </div>
 
         <div class="col-md-4">

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="card border-0 shadow-sm">
+    <div class="card-header bg-success text-white py-3">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <div>
+          <h1 class="h4 mb-1">Add an Operation</h1>
+          <div class="opacity-75 small">Add an operation performed on field {{ context.field.name }}.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body p-4 border">
+      <form method="post" class="row g-3">
+        {{ context.form.csrf_token }}
+
+        <div class="col-md-3">
+          <label class="form-label">Date</label>
+          {{ context.form.date(class="form-control") }}
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Field</label>
+          {{ context.form.field_rel(class="form-select") }}
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Operation</label>
+          <div class="input-group">
+            {{ context.form.operation(class="form-control") }}
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Product / Detail</label>
+          {{ context.form.detail(class="form-control") }}
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Rate</label>
+          {{ context.form.rate(class="form-control") }}
+        </div>
+
+        <!-- Actions -->
+        <div class="col-12 d-flex gap-2 justify-content-end pt-2">
+          <a href="{{ url_for('field_view', field_id = context.field.id) }}" class="btn btn-outline-secondary btn-lg">
+            Cancel
+          </a>
+          <button type="submit" class="btn btn-success btn-lg">
+            Save Field
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

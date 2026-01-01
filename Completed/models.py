@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
+from datetime import datetime, timezone
 
 
 db = SQLAlchemy()
@@ -13,6 +14,7 @@ class Crop(db.Model):
     name = db.Column(db.String, nullable=False)
     sowing = db.Column(db.String)
     targetYield = db.Column(db.Float)
+    value = db.Column(db.Float)
 
     fields = db.relationship("Field", back_populates="crop_rel")
 
@@ -29,10 +31,25 @@ class Field(db.Model):
     drainage = db.Column(db.String)
     pH = db.Column(db.Float)
     SOM = db.Column(db.Float)
+    sowingDate = db.Column(db.String)
+    notes = db.Column(db.String)
+    created = db.Column(db.String, default=lambda: datetime.now(timezone.utc).isoformat())
 
-    # Foreign key column (this is the key missing piece)
     crop = db.Column(db.String, db.ForeignKey("Crops.id"), nullable=True)
-
-    # Relationship (this gives you field.crop)
     crop_rel = db.relationship("Crop", back_populates="fields")
 
+    operations = db.relationship("Operation", back_populates="field_rel", order_by="Operation.date")
+
+
+class Operation(db.Model):
+    __tablename__ = "Operations"
+
+    id = db.Column(db.String, primary_key=True)
+    date = db.Column(db.String, nullable=False, default=lambda: date.today().isoformat())
+    operation = db.Column(db.String, nullable=False)
+    detail = db.Column(db.String)
+    rate = db.Column(db.String)
+
+    field = db.Column(db.String, db.ForeignKey("Fields.id"), nullable=False)
+
+    field_rel = db.relationship("Field", back_populates="operations")

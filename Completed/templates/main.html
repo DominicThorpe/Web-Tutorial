@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block content %}
+  <!-- Farm Summary -->
+  <section class="mb-4 col-md-6">
+    <h2 class="mb-3">Farm Overview</h2>
+    <p>
+      This dashboard shows basic information about the farm and its
+      individual fields. In later seminars, this data will come from
+      a backend and user input.
+    </p>
+  </section>
+
+  <section class="p-3 shadow col-md-6 rounded-2 mb-3">
+    <div class="row">
+      <h3>Basic Farm Info</h3>
+      <ul class="col-8 ps-4">
+        <li>Number of Fields: {{ context.fields | length }}</li>
+        <li>Total Farmed Area: {{ context.total_area }} ha</li>
+        <li>Main Crop: {{ context.main_crop }}</li>
+        <li>Expected Revenue: £{{ "{:,.2f}".format(context.total_value) }}</li>
+      </ul>
+      <img src="{{ url_for('static', filename='Logo.png') }}" alt="Generica farms logo" class="logo col-4">
+    </div>
+  </section>
+
+  <!-- Fields Section -->
+  <section class="col-12 mb-4">
+    <h2 class="mb-3">Fields</h2>
+
+    <div>
+      <table class="table table-responsive table-striped shadow">
+        <tr>
+          <th>Name</th>
+          <th>Area</th>
+          <th>Crop</th>
+          <th>Actions</th>
+        </tr>
+
+        {% for field in context.fields %}
+        <tr>
+          <td>{{ field.name }}</td>
+          <td>{{ field.area | round(2) }} ha</td>
+          <td>{{ field.crop_rel.name }}</td>
+          <td>
+            <a href="{{ url_for('field_view', field_id=field.id) }}" class="btn btn-primary btn-sm">View</a>
+            <a href="{{ url_for('field_delete', field_id=field.id) }}" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+
+      <a href="/field/new" class="btn btn-primary">Add Field</a>
+    </div>
+  </section>
+
+  <div class="border mb-4 shadow p-3 rounded">
+    <div class="row">
+      <div class="chart-wrap col-md-4">
+        <canvas id="pie-chart"></canvas>
+      </div>
+
+      <div class="col-md-8">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Crop</th>
+              <th>Ha Sown</th>
+              <th>Expected Yield</th>
+              <th>£/tonne</th>
+              <th>Total Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for crop, details in context.crop_totals.items() %}
+              <tr>
+                <td>{{ crop }}</td>
+                <td>{{ details.area }} ha</td>
+                <td>{{ details.yield }} T/ha</td>
+                <td>£{{ "{:,.2f}".format(details.value) }}</td>
+                <td>£{{ "{:,.2f}".format(details.area * details.value * details.yield) }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block scripts %}
+  <script id="fields-data" type="application/json">
+    {{ context.crop_totals | tojson }}
+  </script>
+
+
+  <script>
+    const fields_data = JSON.parse(document.getElementById("fields-data").textContent);
+    const ctx = document.getElementById("pie-chart");
+
+    let data = Object.values(fields_data).map(value => value.area);
+
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: Object.keys(fields_data),
+        datasets: [{
+          label: "Field area (ha)",
+          data: data,
+          borderWidth: 1
+        }]
+      },
+
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        plugins: {
+          legend: {
+            position: "right",
+            labels: {
+              boxWidth: 14,
+              padding: 16
+            }
+          },
+
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed;
+                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                const percent = ((value / total) * 100).toFixed(1);
+
+                return `${context.label}: ${value.toFixed(2)} ha (${percent}%)`;
+              }
+            }
+          },
+
+          title: {
+            display: true,
+            text: "Area by Field (hectares)"
+          }
+        }
+      }
+    });
+  </script>
+{% endblock %}

@@ -1,14 +1,15 @@
 from flask import Flask
 from flask import render_template, redirect
 from flask_wtf import FlaskForm
-from wtforms import StringField, FloatField, TextAreaField
+from wtforms import StringField, FloatField, TextAreaField, DateField
 from wtforms.validators import DataRequired
 from wtforms.widgets import TextArea
 from wtforms_sqlalchemy.fields import QuerySelectField
 from statistics import mode
+from datetime import datetime, date, timezone
 import os, random
 
-from models import db, db_name, Field, Crop
+from models import db, db_name, Field, Crop, Operation
 
 
 app = Flask(__name__)
@@ -37,6 +38,7 @@ class FieldForm(FlaskForm):
     risk = StringField('Risk', validators=[DataRequired()])
     irrigation = StringField('Irrigation', validators=[DataRequired()])
     drainage = StringField('Drainage', validators=[DataRequired()])
+    sowingDate = DateField('Sowing Date')
     notes = TextAreaField('Notes', widget=TextArea())
 
     crop_rel = QuerySelectField(
@@ -53,6 +55,20 @@ class FieldForm(FlaskForm):
     )
 
 
+class OperationForm(FlaskForm):
+    date = DateField("Date", default=date.today, validators=[DataRequired()])
+    operation = StringField("Operation", validators=[DataRequired()])
+    detail = StringField("Product / Detail")
+    rate = StringField("Rate")
+    
+    field_rel = QuerySelectField(
+        "Field",
+        query_factory=lambda: Field.query.order_by(Field.name).all(),
+        get_label="name",
+        allow_blank=False
+    )
+
+
 @app.route('/')
 def main():
     fields = (
@@ -65,11 +81,24 @@ def main():
         .all()
     )
 
+    crop_totals = {}
+    for field in fields:
+        if field.crop_rel.name not in crop_totals.keys():
+            crop_totals[field.crop_rel.name] = {
+                "area": field.area,
+                "yield": field.crop_rel.targetYield,
+                "value": field.crop_rel.value
+            }
+        else:
+            crop_totals[field.crop_rel.name]['area'] += field.area
+
     context = {
         "title": "Home", 
         "fields": fields,
         "total_area": sum([field.area for field in fields]),
-        "main_crop": mode([field.crop_rel.name for field in fields])
+        "total_value": sum([field.area * field.crop_rel.value * field.crop_rel.targetYield for field in fields]),
+        "main_crop": mode([field.crop_rel.name for field in fields]),
+        "crop_totals": crop_totals
     }
 
     return render_template('main.html', context=context)
@@ -134,8 +163,44 @@ def field_edit(field_id):
 
 @app.route("/field/delete/<field_id>", methods=["GET"])
 def field_delete(field_id):
-    print(field_id)
     Field.query.filter_by(id = field_id).delete()
     db.session.commit()
 
     return redirect("/")
+
+
+def gen_operation_id():
+    return f"OP-{random.randrange(0, 99999999):08d}"
+
+
+@app.route("/operation/new/<field_id>", methods=["GET", "POST"])
+def operation_new(field_id):
+    form = OperationForm()
+    form.field_rel.data = Field.query.get(field_id)
+    if form.validate_on_submit():
+        operation = Operation()
+        form.populate_obj(operation)
+        operation.id = gen_operation_id()
+
+        db.session.add(operation)
+        db.session.commit()
+
+        return redirect(f"/field/{field_id}")
+
+    context = {
+        "title": "New Operation",
+        "form": form,
+        "field": Field.query.get(field_id)
+    }
+
+    return render_template("new_operation.html", context=context)
+
+
+@app.route("/operation/delete/<operation_id>", methods=["GET"])
+def operation_delete(operation_id):
+    field_id = Operation.query.get(operation_id).field
+
+    Operation.query.filter_by(id = operation_id).delete()
+    db.session.commit()
+
+    return redirect(f"/field/{field_id}")
