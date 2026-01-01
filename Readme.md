@@ -33,6 +33,10 @@ First, install the Python programming language, the VSCode integrated developmen
 
 I advise you regularly back-up your work to [GitHub](https://github.com/) to avoid loss of work.
 
+Once you have a Flask setup, run it by running this command, making sure to `cd <project directory>` into the correct folder first:
+
+`python -m flask --app main run --debug`
+
 ## Further Reading
 
  - [W3Schools](https://www.w3schools.com/) provides excellent materials for beginners to learn HTML, CSS, JavaScript, and SQL
@@ -40,6 +44,8 @@ I advise you regularly back-up your work to [GitHub](https://github.com/) to avo
    - [Tailwind](https://tailwindcss.com/) is another popular CSS framework we will not be using
  - [The Flask Library](https://flask.palletsprojects.com/en/stable/) for Python is what we will be using for our backend; this site provides tutorials for its basic and intermediate features
    - [Flask-WTF](https://flask-wtf.readthedocs.io/en/0.15.x/) will be used to create forms 
+   - [This tutorial](https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH) will give some further information on other features of Flask
    - [Django](https://www.djangoproject.com/) is another, more advanced backend framework for Python which we will not be using
+ - [SQLite DB Browser](https://sqlitebrowser.org/) will be necessary to modify and browse the database
  - [Chartsjs](https://www.chartjs.org/docs/latest/) will be used for creating charts on the dashoard
  - [This tutorial](https://www.datacamp.com/tutorial/third-normal-form) by DataCamp explains in some detail the principles of database design we will be using (3rd Normal Form)
