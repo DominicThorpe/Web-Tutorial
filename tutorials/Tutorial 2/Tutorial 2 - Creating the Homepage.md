@@ -42,6 +42,8 @@ def main():
 
 This loads the Flask library, creates a Flask web server to serve our files to the browser, creates a route the user can navigate to, and then tells the web server what page to send to the user's browser.
 
-<h5>The file *main.html* ***must*** be in the folder *templates* or Flask will not be able to find it<h5>.
+<h5>The file *main.html* ***must*** be in the folder *templates* or Flask will not be able to find it</h5>.
 
 ## Conclusion
+
+In conclusion, we have created a simple webpage to display some simple data about some fields. In the next tutorial we will work on creating a page which can give significantly more data on a field and cover how to work with APIs provided by external entities.
