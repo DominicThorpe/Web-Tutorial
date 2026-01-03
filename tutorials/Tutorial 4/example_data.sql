@@ -1,0 +1,24 @@
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-279', 'Winter Wheat', 'October', '9.2', '181.2');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-441', 'Spring Wheat', 'March', '8.1', '172.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-298', 'Winter Barley', 'October', '7.6', '145.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-945', 'Spring Barley', 'March', '5.5', '157.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-553', 'Oilseed Rape', 'February', '6.2', '439.75');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-612', 'Winter Oats', 'October', '7.4', '165.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-734', 'Spring Oats', 'March', '6.1', '170.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-815', 'Winter Rye', 'October', '6.8', '155.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-926', 'Triticale', 'October', '7.0', '160.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-347', 'Grain Maize', 'April', '9.5', '190.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-458', 'Field Beans (Winter)', 'October', '4.8', '245.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-569', 'Field Beans (Spring)', 'March', '4.2', '255.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-671', 'Peas (Combining)', 'March', '4.0', '265.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-782', 'Sugar Beet', 'March', '75.0', '40.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-893', 'Potatoes', 'April', '45.0', '180.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-125', 'Linseed (Winter)', 'September', '2.2', '420.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-236', 'Linseed (Spring)', 'April', '2.0', '435.0');
+INSERT INTO "Crops" ("ID", "Name", "Sowing", "TargetYield", "Value") VALUES ('C-348', 'Cover Crop Mix', 'August', '0.0', '0.0');
+
+INSERT INTO "Fields" ("ID", "Area", "Crop", "Name", "Created", "Irrigation", "Drainage", "Risk", "pH", "SOM", "SoilType", "Notes", "SowingDate") VALUES ('F-1763', '7.83', 'C-279', 'North Field', '2025-12-29', 'Rainfed', 'Medium', 'Moderate', '7.0', '4.1', 'Sandy Loam', '', '2025-10-05');
+INSERT INTO "Fields" ("ID", "Area", "Crop", "Name", "Created", "Irrigation", "Drainage", "Risk", "pH", "SOM", "SoilType", "Notes", "SowingDate") VALUES ('F-9927', '3.22', 'C-279', 'East Field', '2025-12-29', 'Rainfed', 'Medium', 'Moderate', '7.0', '4.3', 'Sandy Loam', '', '2025-10-06');
+INSERT INTO "Fields" ("ID", "Area", "Crop", "Name", "Created", "Irrigation", "Drainage", "Risk", "pH", "SOM", "SoilType", "Notes", "SowingDate") VALUES ('F-2771', '4.86', 'C-441', 'West Field', '2025-12-29', 'Rainfed', 'Medium', 'Moderate', '7.0', '5.2', 'Loam', '', '');
+INSERT INTO "Fields" ("ID", "Area", "Crop", "Name", "Created", "Irrigation", "Drainage", "Risk", "pH", "SOM", "SoilType", "Notes", "SowingDate") VALUES ('F-6591', '9.03', 'C-945', 'Central Field', '2025-12-29', 'Rainfed', 'Medium', 'Moderate', '7.0', '2.8', 'Loam', 'Here are some extra notes I made', '');
+INSERT INTO "Fields" ("ID", "Area", "Crop", "Name", "Created", "Irrigation", "Drainage", "Risk", "pH", "SOM", "SoilType", "Notes", "SowingDate") VALUES ('F-2904', '11.43', 'C-553', 'South Field', '2025-12-29', 'Rainfed', 'Medium', 'Moderate', '7.0', '4.0', 'Sandy Loam', '', '');

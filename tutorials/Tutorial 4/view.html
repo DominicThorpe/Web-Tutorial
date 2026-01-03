@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1 class="mb-3">{{ context.title }}</h1>
+  <div class="d-flex">
+    <a href="#" class="btn btn-primary me-2">Edit</a>
+    <a href="#" class="btn btn-danger">Delete</a>
+  </div>
+
+  <!-- KPIs -->
+  <section class="row g-3 mb-4">
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card shadow-soft h-100">
+        <div class="card-body kpi">
+          <div class="small-label">Area</div>
+          <div class="display-6 fw-semibold">{{ context.field.area }}</div>
+          <div class="text-muted">hectares</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card shadow-soft h-100">
+        <div class="card-body kpi">
+          <div class="small-label">Soil type</div>
+          <div class="h4 mb-1 fw-semibold">{{ context.field.soilType }}</div>
+          <div class="text-muted">{{ context.field.drainage }} drainage</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card shadow-soft h-100">
+        <div class="card-body kpi">
+          <div class="small-label">Last operation</div>
+          <div class="h5 mb-1 fw-semibold">No previous actions</div>
+          <div class="text-muted">N/A</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card shadow-soft h-100">
+        <div class="card-body kpi">
+          <div class="small-label">Risk flag</div>
+          <div class="h4 mb-1 fw-semibold">{{ context.field.risk }}</div>
+          <div class="text-muted">Watch lodging</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row g-3">
+    <!-- Left column: field details -->
+    <div class="col-12 col-lg-4">
+      <div class="card shadow-soft mb-3">
+        <div class="card-body">
+          <h2 class="h5 mb-3">Field Details</h2>
+          <ul class="list-unstyled list-tight mb-0">
+            <li><strong>Crop:</strong> {{ context.field.crop_rel.name }}</li>
+            <li><strong>Sowing date:</strong> {{ context.field.sowingDate }}</li>
+            <li><strong>Target yield:</strong> {{ context.field.crop_rel.targetYield }} t/ha</li>
+            <li><strong>Irrigation:</strong> {{ context.field.irrigation }}</li>
+            <li><strong>Drainage:</strong> {{ context.field.drainage }}</li>
+            <li><strong>pH (last test):</strong> {{ context.field.pH }}</li>
+            <li><strong>Organic matter:</strong> {{ context.field.SOM }}%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card shadow-soft mb-3">
+        <div class="card-body">
+          <h2 class="h5 mb-3">Notes</h2>
+          <p class="mb-0 text-muted">
+            {{ context.field.notes }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: charts + logs -->
+    <div class="col-12 col-lg-8">
+      <div class="card shadow-soft mb-3">
+        <div class="card-body">
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3">
+            <div>
+              <h2 class="h5 mb-0">Rainfall (last 14 days)</h2>
+              <div class="text-muted small">Source: DEFRA (Environment Agency) Data Services Platform</div>
+            </div>
+            <div class="text-muted small">
+              Units: Rainfall (mm/day)
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <canvas id="fieldChart" aria-label="Rainfall chart" role="img"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-soft mb-4">
+        <div class="card-body">
+          <h2 class="h5 mb-3">Operations Log</h2>
+          <div class="table-responsive">
+            <table class="table table-sm align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th style="width: 100px;">Date</th>
+                  <th>Operation</th>
+                  <th>Product / Detail</th>
+                  <th>Rate</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-01-05</td>
+                  <td>Drilling</td>
+                  <td>Winter wheat drilling</td>
+                  <td>180 kg/ha</td>
+                  <td><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
+
+                <tr>
+                  <td>2025-03-05</td>
+                  <td>Nitrogen Top Dressing</td>
+                  <td>Ammonium nitrate (34.5% N)</td>
+                  <td>70 kg N/ha</td>
+                  <td><a href="#" class="btn btn-sm btn-danger">Delete</a></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <a href="{{ url_for('operation_new', field_id=context.field.id) }}" class="btn btn-success mt-3">Add Operation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='rainfall_chart.js') }}"></script>
+{% endblock %}
