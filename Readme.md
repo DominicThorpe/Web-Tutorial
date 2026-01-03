@@ -49,3 +49,11 @@ Once you have a Flask setup, run it by running this command, making sure to `cd 
  - [SQLite DB Browser](https://sqlitebrowser.org/) will be necessary to modify and browse the database
  - [Chartsjs](https://www.chartjs.org/docs/latest/) will be used for creating charts on the dashoard
  - [This tutorial](https://www.datacamp.com/tutorial/third-normal-form) by DataCamp explains in some detail the principles of database design we will be using (3rd Normal Form)
+
+## Contact
+
+If you have any questions about this project, please create an issue in the GitHub issues tab where I will respond as quickly as possible. You could also suggest other features or topics you would like to see there.
+
+## Catchup
+
+I am hoping to record the in-person classes to allow people unable to attend in-person to follow along.
