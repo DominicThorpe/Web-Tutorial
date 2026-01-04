@@ -120,13 +120,13 @@ def gen_field_id():
     Generate a simple human-readable ID for a Field.
 
     Returns:
-        str: An ID of the form 'C-####' (e.g. 'C-0042').
+        str: An ID of the form 'F-####' (e.g. 'F-0042').
 
     Notes:
         - Uses random numbers, so collisions are possible.
         - If uniqueness matters, consider checking the database or using UUIDs.
     """
-    return f"C-{random.randrange(0, 9999):04d}"
+    return f"F-{random.randrange(0, 9999):04d}"
 
 
 @app.route("/field/new", methods=["GET", "POST"])
