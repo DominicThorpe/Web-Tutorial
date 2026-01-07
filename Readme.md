@@ -4,6 +4,8 @@
 
 In the modern agricultural workplace, technology is becoming increasingly essential, and a working knowledge of programming and scripting is a useful tool for any employee, manager, or business owner. This course aims to equip you with a basic foundation in the development of simple, visual applications which interact with a backend database and performs simple data processing with a project which is relevant for those pursuing agriculture or land-management-related professional goals.
 
+### I highly recommend you take [this](https://www.codecademy.com/learn/learn-python-3) course before/whilst following this one
+
 ## Learning Objectives
 
 ### What You Will Learn
@@ -39,6 +41,7 @@ Once you have a Flask setup, run it by running this command, making sure to `cd 
 
 ## Further Reading
 
+ - [Codecademy](https://www.codecademy.com/learn/learn-python-3) provides a course on Python which I ***highly*** recommend you take at least some of before taking this course
  - [W3Schools](https://www.w3schools.com/) provides excellent materials for beginners to learn HTML, CSS, JavaScript, and SQL
  - [Bootstrap 5](https://getbootstrap.com/) will be used extensively in this project to provide styling
    - [Tailwind](https://tailwindcss.com/) is another popular CSS framework we will not be using
