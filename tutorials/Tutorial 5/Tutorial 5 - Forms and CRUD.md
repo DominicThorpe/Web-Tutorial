@@ -133,4 +133,8 @@ For this activity, create a table with the following columns:
  - Rate (String)
  - Field (Foreign key, not null)
 
-Then create a route which allows the user to go to a page with a form which allows them to add a new operation to a field, and another route which deletes a specific operation, and connect these routes to the field details view page. An example of how this could be done is shown in the completed project files.   
+Then create a route which allows the user to go to a page with a form which allows them to add a new operation to a field, and another route which deletes a specific operation, and connect these routes to the field details view page. An example of how this could be done is shown in the completed project files.
+
+## Conclusion
+
+We have looked at how we can create forms in Flask and use them to create new entries in our database and update existing entries. In the next session we will look at how we can synthesise our data to make our dashboard stats properly dynamic.
