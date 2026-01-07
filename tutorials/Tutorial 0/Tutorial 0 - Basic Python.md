@@ -165,18 +165,22 @@ print(field.name)
 print(field.area)
 ```
 
-A method is a function inside a class which can use the data inside the object:
+A method is a function inside a class which can use the data inside the object. There is a special method `__init__(self)` which describes what to do when an object is created from a class and may take arguments which are used when the object is created from the class:
 
 ```python
 class Field:
-    name = "North Field"
-    area = 3.2
+    crop = "Wheat"
+
+    def __init__(self, name, area):
+        self.name = name
+        self.area = area
 
     def describe(self):
-        print(f"{self.name} is {self.area} hectares!")
+        print(f"{self.name} is {self.area} hectares and contains {self.crop}!")
 
-field = Field()
-print(field.describe())
+# arguments passed to the __init__ function
+field = Field("Main Field", 5.1)
+field.describe()
 ```
 
 `self` refers to the object the method is inside of.
