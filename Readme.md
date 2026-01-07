@@ -4,7 +4,7 @@
 
 In the modern agricultural workplace, technology is becoming increasingly essential, and a working knowledge of programming and scripting is a useful tool for any employee, manager, or business owner. This course aims to equip you with a basic foundation in the development of simple, visual applications which interact with a backend database and performs simple data processing with a project which is relevant for those pursuing agriculture or land-management-related professional goals.
 
-### I highly recommend you take [this](https://www.codecademy.com/learn/learn-python-3) course before/whilst following this one
+### ***I highly recommend you take [this](https://www.youtube.com/watch?v=OFrLs22MDAw&list=PLzMcBGfZo4-mFu00qxl0a67RhjjZj3jXm&index=1) course before/whilst following this course and watch at least the first 12 videos.***
 
 ## Learning Objectives
 
